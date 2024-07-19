@@ -1,0 +1,25 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS ATM;
+
+-- Use the database
+USE ATM;
+
+-- Drop tables if they already exist
+DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS login;
+
+-- Create the login table
+CREATE TABLE login (
+    user CHAR(20) NOT NULL PRIMARY KEY,
+    password VARCHAR(20) NOT NULL
+);
+
+-- Create the accounts table
+CREATE TABLE accounts (
+    account_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    account_number VARCHAR(20) NOT NULL UNIQUE,
+    pin VARCHAR(4) NOT NULL,
+    balance DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    user CHAR(20) NOT NULL,
+    FOREIGN KEY (user) REFERENCES login(user)
+);
